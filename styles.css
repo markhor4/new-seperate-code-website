@@ -151,6 +151,10 @@ body {
     background-color: #F5F5F5;
     color: #121212;
 }
+.presale input[type="number"]::-webkit-inner-spin-button,
+.presale input[type="number"]::-webkit-outer-spin-button {
+    opacity: 1;
+}
 .presale .result-boxes {
     display: flex;
     justify-content: space-around;
