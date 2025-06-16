@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://unpkg.com https://api.coingecko.com 'sha256-udgDJrpa9XbgiZEztwbphc4Uo2q5SYAc5RFb1Axg5h8T7Vy'; connect-src 'self' https://api.coingecko.com ws://localhost:* http://localhost:*; style-src 'self' 'unsafe-inline'; img-src 'self';">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://unpkg.com; connect-src 'self' https://api.coingecko.com https://api.mainnet-beta.solana.com https://api.devnet.solana.com ws://localhost:* http://localhost:*; style-src 'self' 'unsafe-inline'; img-src 'self' data:;">
     <title>Boozer (BoozCoin) - Solana Meme Coin</title>
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -30,8 +30,8 @@
         <div class="presale-card">
             <h2>Auto Presale: Grab Your BOOZ! 🍺</h2>
             <p>Join the presale and get your share of 300M BOOZ tokens! Pay with SOL.</p>
-            <div class="timer" id="presale-timer">Presale Starts on June 25, 2025!</div>
-            <div class="price-info" id="price-info">Current Price: $0.00003 per BOOZ (🍺 Boozer Shot)</div>
+            <div class="timer" id="presale-timer">Checking presale status...</div>
+            <div class="price-info" id="price-info">Current Price: Loading...</div>
             <div class="price-note">Prices increase gradually so Grab Your BOOZ early!</div>
             <p>Current SOL Price: <span id="sol-price">Fetching...</span> USD</p>
             <p>Tokens Sold: <span id="tokens-sold">0</span>/300M</p>
@@ -48,8 +48,9 @@
                     <p>Total Cost: <span id="usd-cost">0</span> USD</p>
                 </div>
             </div>
-            <button onclick="buyBooz()">Buy BOOZ Now</button>
-            <p class="wallet-info">Presale Wallet: HY6po9XbgiZEztwbphc4Uo2q5SYAc5RFb1Axg5h8T7Vy</p>
+            <div id="wallet-adapter"></div>
+            <button id="buy-booz-btn" disabled>Buy BOOZ Now</button>
+            <p class="wallet-info" id="wallet-info">No wallet connected</p>
             <p class="airdrop-info">Airdrop live now! Join on <a href="https://x.com/boozer_coin" target="_blank">X</a>.</p>
 
             <!-- Transaction History -->
@@ -172,7 +173,8 @@
         </div>
     </section>
 
-    <script defer src="https://unpkg.com/@solana/pay/dist/index.js"></script>
-    <script defer src="script.js"></script>
+    <script type="module" src="script.js"></script>
+    <script src="https://unpkg.com/@solana/pay@0.2.0/dist/index.js"></script>
+    <script src="https://unpkg.com/@solana/wallet-adapter-react-ui@0.9.24/dist/index.global.js"></script>
 </body>
 </html>
