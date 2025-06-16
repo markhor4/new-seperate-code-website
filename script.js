@@ -51,7 +51,7 @@ function updatePriceDisplay() {
 }
 
 // Check Presale Start Date
-const presaleStartDate = new Date('2025-06-25T00:00:00+05:00'); // PKT timezone
+const presaleStartDate = new Date('2025-06-16T18:02:00+05:00'); // Today, 6:02 PM PKT
 function checkPresaleStatus() {
     const now = new Date();
     const timerElement = document.getElementById('presale-timer');
@@ -88,7 +88,7 @@ function updateCalculations() {
         console.log('SOL price not available.');
         return;
     }
-    const usdAmount = Number((solAmount * solPriceInUSD).toFixed(8));
+    const usdAmount = Number((solAmount * solPriceInUSD). toFixed(8));
     let boozAmount = Math.floor(Number((usdAmount / price).toFixed(8)));
     const remainingTokens = 300000000 - tokensSold;
     if (boozAmount > remainingTokens) {
@@ -140,7 +140,7 @@ async function buyBooz() {
 
     const now = new Date();
     if (now < presaleStartDate) {
-        alert('Presale has not started yet! It starts on June 25, 2025.');
+        alert('Presale has not started yet! It starts on June 16, 2025.');
         return;
     }
 
@@ -179,7 +179,7 @@ async function buyBooz() {
 
 // Presale Timer (after start)
 function startTimer() {
-    const endDate = new Date('2025-07-02T00:00:00+05:00'); // 7 days from June 25, 2025
+    const endDate = new Date('2025-06-23T18:02:00+05:00'); // 7 days from now
     const timerElement = document.getElementById('presale-timer');
     setInterval(() => {
         const now = new Date();
@@ -195,6 +195,15 @@ function startTimer() {
         timerElement.textContent = `Presale Ends in: ${days}d ${hours}h ${minutes}m ${seconds}s`;
     }, 1000);
 }
+
+// Dynamic Button Enabling
+function updateButtonState() {
+    const now = new Date();
+    const buyButton = document.querySelector('.presale button');
+    buyButton.disabled = now < presaleStartDate || tokensSold >= 300000000;
+}
+setInterval(updateButtonState, 1000);
+updateButtonState();
 
 checkPresaleStatus();
 updatePriceDisplay();
